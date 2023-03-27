@@ -1,19 +1,26 @@
-%function v = fun(t,Y)
+tempfunc = @(t,Y) kuznetov_fun(t,Y);
+[t, Y] =ode45(tempfunc, [0, 3.5], [10^6 10^6]);
+plot(Y(:,1), Y(:,2))
 
-%  x = Y(1);
-%  y = Y(2);
-%  v(1) = a.*T.*(1-b.*T) - n.*E.*T;
-%  v(2) = s - d.*E + p.*E.*(T./(g+T)) - m.*E.*T;
-%  v = v';
+title('ODE of Kuznetsov et al. (1994) model')
+xlabel('E (cells)')
+ylabel('T (cells)')
 
-%end
+function v = kuznetov_fun(t,Y)
+    s= 13000;
+    d = 0.0412;
+    p = 0.1245;
+    a = 0.18;
+    g = 2.019.*10^7;
+    m = 3.422.*(10^(-10));
+    b = 2.*10^9;
+    n=1.101.*10^(-7);
 
-function v = fun(t,Y)
-
-  x = Y(1);
-  y = Y(2);
-  v(1) = 13000 - 0.0412.*E + 0.1245.*E.*(T./((2.019.*10^7)+T)) - (3.422.*(10^-10)).*E.*T;
-  v(2) = 0.18.*T.*(1-b.*T) - n.*E.*T;
-  v = v';
-
+    E = Y(1);
+    T = Y(2);
+    
+    v(1) = s - d.*E + p.*E.*(T./(g+T)) - m.*E.*T;
+    v(2) = a.*T.*(1-b.*T) - n.*E.*T;
+    
+    v = v';
 end
