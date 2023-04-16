@@ -30,9 +30,9 @@ plot(x,zeros(size(x)), 'Color', [0.4660 0.6740 0.1880])
 
 % plot intersection points
 labels = {'A - unstable', 'B - stable', 'C - unstable', 'D - stable'};
-e = [0.3155 1.6093 0.7172 0.1825];
-t = [0 8.158 280.8 442.2];
-plot(e, t, 'o') 
+e = [0.3155 1.6093 0.76 0.1825];
+t = [0 8.158 272 442.2];
+plot(e, t, 'o', 'Color', 'black') 
 
 text(e, t, labels, 'VerticalAlignment','bottom','HorizontalAlignment','left');
 title('Nullclines of Kuznetsov et al. (1994) model')
