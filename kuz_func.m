@@ -1,7 +1,7 @@
 tempfunc = @(t,Y) kuznetov_fun(t,Y);
 % make t larger until it looks like the paper's
 
-max_time = 10^8;
+max_time = 10^6;
 
 % original conditions
 %{
@@ -11,8 +11,8 @@ hold on
 %}
 
 % different inital conditions
-[t2, Y2] = ode45(tempfunc, [0, max_time], [0 10^8]); 
-plot(t2, Y2)
+[t2, Y2] = ode45(tempfunc, [0, max_time], [2*10^6 4.5*10^8]); 
+plot(Y2(:,1), Y2(:,2))
 
 % graph formatting things
 title('ODE of Kuznetsov et al. (1994) model')
