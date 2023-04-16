@@ -1,25 +1,26 @@
 tempfunc = @(t,Y) kuznetov_fun(t,Y);
-% make t larger until it looks like the paper's
-
 max_time = 10^6;
 
-% original conditions
-%{
-[t0, Y0] = ode45(tempfunc, [0, max_time], [10^6 10^6]); 
+% add effector cells
+[t0, Y0] = ode45(tempfunc, [0, max_time], [2*10^6 4.5*10^8]); 
 plot(Y0(:,1), Y0(:,2))
-hold on
-%}
+hold on 
 
-% different inital conditions
-[t2, Y2] = ode45(tempfunc, [0, max_time], [2*10^6 4.5*10^8]); 
-plot(Y2(:,1), Y2(:,2))
+% trajectory going to large tumor state
+[t1, Y1] = ode45(tempfunc, [0, max_time], [0 0.15*10^8]); 
+plot(Y1(:,1), Y1(:,2))
+
+% dotted line (added E cells
+plot([0.0017*10^8 2*10^6], [4.4728*10^8 4.5*10^8], 'LineStyle', '--')
+plot(0.0017*10^8, 4.4728*10^8, 'o','Color','black')
 
 % graph formatting things
 title('ODE of Kuznetsov et al. (1994) model')
+axis([0 3.5*10^6 0 5*10^8])
+legend('Small Tumor Equilibrium', 'Large Tumor State', 'Added Effector Cells')
 xlabel('E (cells)')
 ylabel('T (cells)')
 
-% Y1(end,:
 function v = kuznetov_fun(t,Y)
     s = 13000;
     d = 0.0412;
