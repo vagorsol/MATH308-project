@@ -29,12 +29,20 @@ x = 0:1:5;
 plot(x,zeros(size(x)), 'Color', [0.4660 0.6740 0.1880]) 
 
 % plot intersection points
-labels = {'A - unstable', 'B - stable', 'C - unstable', 'D - stable'};
-e = [0.3155 1.6093 0.76 0.1825];
-t = [0 8.158 272 442.2];
-plot(e, t, 'o', 'Color', 'black') 
+labels_saddle = {'A - unstable','C - unstable'};
+labels_steady = {'B - stable','D - stable'};
+es = [0.3155 0.76];
+ts = [0 272];
 
-text(e, t, labels, 'VerticalAlignment','bottom','HorizontalAlignment','left');
+ed = [1.6093 0.1825];
+td = [8.158 442.2];
+
+plot(es, ts, 'o', 'Color', 'black') 
+plot(ed, td, '.', 'Color', 'black') 
+
+
+text(es, ts, labels_saddle, 'VerticalAlignment','bottom','HorizontalAlignment','left');
+text(ed, td, labels_steady, 'VerticalAlignment','bottom','HorizontalAlignment','left');
 title('Nullclines of Kuznetsov et al. (1994) model')
 legend('E-nullclines','T-nullclines')
 axis([0 5 0 500])
